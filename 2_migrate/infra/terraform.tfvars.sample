@@ -1,0 +1,3 @@
+folderId = "ваш идентификатор из облака"
+region   = "ru-central1"
+zone     = "ru-central1-a"
