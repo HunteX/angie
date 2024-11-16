@@ -1,0 +1,59 @@
+- name: Сохранение состояния slow start после простоя
+  ansible.posix.sysctl:
+    name: net.ipv4.tcp_slow_start_after_idle
+    value: '0'
+    state: present
+
+- name: Поиск оптимального MTU на пути пакетов
+  ansible.posix.sysctl:
+    name: net.ipv4.tcp_mtu_probing
+    value: '1'
+    state: present
+
+- name: Размер буфера TCP для отправки
+  ansible.posix.sysctl:
+    name: net.ipv4.tcp_notsent_lowat
+    value: '65536'
+    state: present
+
+- name: Диапазон локальных портов (количество подключений к апстримам)
+  ansible.posix.sysctl:
+    name: net.ipv4.ip_local_port_range
+    value: '1024 65535'
+    state: present
+
+- name: Переиспользование соединений в состоянии time wait
+  ansible.posix.sysctl:
+    name: net.ipv4.tcp_tw_reuse
+    value: '1'
+    state: present
+
+- name: Размер таблицы conntrack
+  ansible.posix.sysctl:
+    name: net.netfilter.nf_conntrack_max
+    value: '1048576'
+    state: present
+
+- name: Очередь фреймов для обработки
+  ansible.posix.sysctl:
+    name: net.core.netdev_max_backlog
+    value: '10000'
+    state: present
+
+- name: Максимальный размер очереди коннектов на сокет
+  ansible.posix.sysctl:
+    name: net.core.somaxconn
+    value: '81920'
+    state: present
+
+- name: Выбор алгоритма TCP congestion control
+  ansible.posix.sysctl:
+    name: net.ipv4.tcp_congestion_control
+    value: 'bbr'
+    state: present
+
+- name: Выбор алгоритма TCP queueing discipline
+  ansible.posix.sysctl:
+    name: net.core.default_qdisc
+    value: 'fq'
+    state: present
